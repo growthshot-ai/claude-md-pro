@@ -4,6 +4,8 @@ A 200-line **CLAUDE.md** for Claude Code that fuses Andrej Karpathy's code-level
 
 Drop it in your project root. Watch your agent stop drifting.
 
+> **New here?** The full plain-English explanation of every rule, with stories, examples, and a glossary, lives in [GUIDE.md](GUIDE.md). Five minutes to read.
+
 ## What is this
 
 Karpathy's CLAUDE.md (compiled in [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills), 138K stars on GitHub) covers code-level discipline: think before coding, simplicity first, surgical changes, goal-driven execution.
