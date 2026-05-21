@@ -4,8 +4,6 @@ A 200-line **CLAUDE.md** for Claude Code that fuses Andrej Karpathy's code-level
 
 Drop it in your project root. Watch your agent stop drifting.
 
-> **New here?** The full plain-English explanation of every rule, with stories, examples, and a glossary, lives in [GUIDE.md](GUIDE.md). Five minutes to read.
-
 ## What is this
 
 Karpathy's CLAUDE.md (compiled in [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills), 138K stars on GitHub) covers code-level discipline: think before coding, simplicity first, surgical changes, goal-driven execution.
@@ -18,7 +16,7 @@ It does not cover what happens over long agent sessions:
 - The Promise Echo. Insights spoken but never saved.
 - Trust By Mechanism. The audit log your agent cannot lie to.
 
-These 5 patterns cost real money in wasted token spend and real time in rework. This file adds 5 rules that fix them, fused with Karpathy's 4. Nine rules total. Under 200 lines.
+These 5 patterns cost real money in wasted token spend and real time in rework. This file adds 5 rules that fix them, fused with Karpathy's 4, plus 2 more agent engineering principles (autonomy + self-annealing). Eleven rules total. Under 200 lines.
 
 ## Who this is for
 
@@ -32,12 +30,13 @@ These 5 patterns cost real money in wasted token spend and real time in rework. 
 1. Copy [CLAUDE.md](CLAUDE.md) into the root of your project.
 2. That is it.
 
-Claude Code automatically loads CLAUDE.md from the project root into every session. If you already have a CLAUDE.md, merge the rules from this file into yours. The 9 rules play well with project-specific instructions.
+Claude Code automatically loads CLAUDE.md from the project root into every session. If you already have a CLAUDE.md, merge the rules from this file into yours. The 11 rules play well with project-specific instructions.
 
 ## What is inside
 
 - **Part A: Code-Level Discipline** (rules 1-4, adapted from Karpathy's observations).
 - **Part B: Session and Orchestration Discipline** (rules 5-9, original from real builds).
+- **Part C: Agent Engineering Principles** (rules 10-11, autonomy + self-annealing).
 
 Each rule has a body, a bullet list of how to apply it, and a one-line "Rule" you can tape to the wall.
 
@@ -53,6 +52,7 @@ Stacked, they cover both layers: what the agent writes AND how the agent thinks 
 
 - **Part A** based on Andrej Karpathy's public observations about LLM coding mistakes. The community compilation that popularized them lives at [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills).
 - **Part B** original work by Varuna Jain, founder of GrowthShot.ai (global) and GrowthSetu.ai (India). Drawn from real long-session Claude Code builds running voice, WhatsApp, and website AI agents for small and medium businesses.
+- **Part C** original work by Varuna Jain, building on agent engineering principles widely discussed in the AI agent engineering community.
 
 ## License
 

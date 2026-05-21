@@ -1,6 +1,6 @@
 # The Plain-English Guide to Claude Code Discipline
 
-*9 rules that turn your AI from a chatty intern into a focused builder. Written for anyone who builds with AI agents, even if you have never written a line of code.*
+*11 rules that turn your AI from a chatty intern into a focused builder. Written for anyone who builds with AI agents, even if you have never written a line of code.*
 
 ---
 
@@ -14,7 +14,7 @@ I lost about 30 minutes and three full agent runs cleaning up the mess. Worse th
 
 I stopped and asked a simple question: *what is this, and how do I stop it?*
 
-This guide is the answer. Nine rules, in plain words. Four come from Andrej Karpathy (a top AI researcher whose ideas are widely shared on GitHub). Five are mine, learned from real long-session builds running voice, WhatsApp, and website AI agents for small and medium businesses.
+This guide is the answer. Eleven rules, in plain words. Four come from Andrej Karpathy (a top AI researcher whose ideas are widely shared on GitHub). Five are mine, learned from real long-session builds running voice, WhatsApp, and website AI agents for small and medium businesses. Two more are agent engineering principles widely discussed in the community: how the AI should run autonomously, and how it should fix its own mistakes.
 
 Together they make Claude Code (or any LLM agent) about 10 times more disciplined.
 
@@ -39,13 +39,15 @@ Together they make Claude Code (or any LLM agent) about 10 times more discipline
 
 ---
 
-## The two-part rulebook
+## The three-part rulebook
 
 Karpathy's 4 rules cover **what to do at the code level**. Line by line.
 
 My 5 rules cover **how to stay honest over a long session**. Across hours, across sub-agents, across tasks.
 
-Stacked, they cover both layers. Read both parts.
+The last 2 rules cover **how the AI should run on its own and recover from its own mistakes**. The autonomous-agent layer.
+
+Stacked, they cover three layers. Read all three parts.
 
 ---
 
@@ -175,6 +177,45 @@ If any one layer fails, including the AI skipping a rule, the next layer still c
 
 ---
 
+# Part C: The Agent Engineering Rules
+
+These two rules cover how the AI should operate when you are not standing over its shoulder. They borrow from a broader conversation in the AI engineering community about how to design agents that can run on their own.
+
+## Rule 10: Run Autonomously, Escalate Only When Necessary
+
+After you give the AI a clear brief, it should work on its own until the job is done.
+
+**Imagine this.** You hire a senior chef. You give them the menu. You do not stand in the kitchen asking "is the soup ready?" every 30 seconds. They cook. They taste. They adjust. They serve. They only call you out if they cannot find an ingredient or a customer has an allergy you did not warn them about.
+
+AI agents should work the same way. Most agents are the opposite of senior chefs by default. They ask "is this OK?" every two steps. That kills momentum and burns your time.
+
+**How to apply.** Tell the AI: after the initial brief, do not ask for validation or progress checks. Test your own work. Diagnose your own failures. Loop until the success criteria are met. Escalate only when truly blocked: a missing piece of information, a real ambiguity, or a constraint that requires the user's input.
+
+Put small guardrails around cost-sensitive actions: limits on API calls per loop, a cap on token spend per task, a log of every external call. These let the AI work alone without burning your budget.
+
+**The rule.** *Come to the user only if you absolutely need to.*
+
+## Rule 11: Self-Anneal. Convert Failures Into Updates
+
+When something breaks, the AI should not just patch the symptom and move on. It should diagnose the root cause, fix the immediate breakage, AND update the system so the same failure cannot return silently.
+
+**Imagine this.** Your body fights off a flu. Once it beats the virus, it remembers. Next time the same flu shows up, your immune system kills it faster. The body did not just "get back to normal." It got stronger than before.
+
+AI agents should treat failures the same way. Each bug they fix should leave the system stronger than it was, not just back to normal. The same mistake should not return six sessions later because the lesson was never written down.
+
+**How to apply.** Build the 4-step loop into how the AI handles failures:
+
+- **Error.** Notice it.
+- **Reason.** Diagnose the root cause, not just the symptom.
+- **Solve.** Fix the immediate breakage.
+- **Update.** Modify the rule, the prompt, the memory entry, the audit log, or the test that should have caught it.
+
+The Update step is the one that gets skipped most often. Without it, the same bug returns over and over. With it, every failure makes your system stronger.
+
+**The rule.** *Every failure earns a permanent update.*
+
+---
+
 ## How to install (60 seconds)
 
 1. Go to the GitHub repo (link in the DM you got).
@@ -182,7 +223,7 @@ If any one layer fails, including the AI skipping a rule, the next layer still c
 3. Paste it at the top level of your project folder. Same level as your README or package.json.
 4. That is it. Claude Code will load it automatically the next time you start a session.
 
-If you already have a CLAUDE.md, add the 9 rules to it. They play well alongside project-specific rules.
+If you already have a CLAUDE.md, add the 11 rules to it. They play well alongside project-specific rules.
 
 ---
 
@@ -194,6 +235,8 @@ If you already have a CLAUDE.md, add the 9 rules to it. They play well alongside
 - Your token bill on long sessions stops climbing for no reason.
 - You catch drift through the audit log, not by re-reading the AI's work.
 - The AI compacts the session itself when it senses the window getting full.
+- The AI works longer between check-ins without losing direction (autonomy is on).
+- Failure modes that used to repeat now become permanent rule updates instead (self-annealing is on).
 
 ---
 
@@ -213,6 +256,7 @@ If you already have a CLAUDE.md, add the 9 rules to it. They play well alongside
 
 - The 4 code-level rules are based on public observations by Andrej Karpathy, an AI researcher widely respected in the field. A community compilation of his ideas lives at github.com/multica-ai/andrej-karpathy-skills.
 - The 5 session-level rules are original work by Varuna Jain, founder of GrowthShot.ai (global) and GrowthSetu.ai (India). Drawn from real long-session Claude Code builds running voice, WhatsApp, and website AI agents for small and medium businesses.
+- The 2 agent engineering rules are also Varuna's, building on principles widely discussed in the AI agent engineering community.
 
 This guide is free to use, share, and adapt. Credit appreciated but not required.
 

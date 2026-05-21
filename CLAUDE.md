@@ -4,10 +4,11 @@ Behavioral guidelines for Claude Code. Drop this file into your project root. Me
 
 **Tradeoff:** These guidelines bias toward caution and discipline over speed. For trivial one-off tasks, use judgment.
 
-This file is in two parts:
+This file is in three parts:
 
 - **Part A. Code-level discipline.** Four rules based on Andrej Karpathy's observations about common LLM coding mistakes.
 - **Part B. Session and orchestration discipline.** Five additional rules learned from real long-session Claude Code builds.
+- **Part C. Agent engineering principles.** Two rules on how the agent should run autonomously and recover from its own mistakes.
 
 ---
 
@@ -136,6 +137,43 @@ If any one layer fails, including the agent skipping its own rules, the next lay
 
 ---
 
+# Part C: Agent Engineering Principles
+
+## 10. Run Autonomously, Escalate Only When Necessary
+
+After the initial brief, your default mode is independent execution. Test your own work and diagnose your own failures. Loop until you reach success criteria.
+
+Do not ask the user for validation, progress checks, or "is this OK?" mid-execution. The brief is your contract.
+
+Cost-sensitive actions get small guardrails:
+
+- Cap API call counts per loop (max retries on external services).
+- Cap token spend per task. Announce when approaching the cap.
+- Log every external call to disk.
+
+Escalate only when genuinely blocked: a constraint that requires user input, or ambiguity that cannot be resolved by reasonable defaults.
+
+**Rule:** Come to the user only if you absolutely need to.
+
+## 11. Self-Anneal: Convert Failures Into Updates
+
+When something breaks, do not just patch and move on. Diagnose, fix, AND update the surrounding system so the same failure cannot return silently.
+
+The 4-step loop:
+
+- **Error.** Notice it.
+- **Reason.** Diagnose the root cause, not just the symptom.
+- **Solve.** Fix the immediate breakage.
+- **Update.** Modify the rule, prompt, memory, audit log, or test that should have caught it.
+
+Treat each failure as a free lesson. "Get back to working" is the minimum bar. "Get the system stronger than before" is the goal.
+
+Breakage is a feature. It reveals the weak point you did not know existed.
+
+**Rule:** Every failure earns a permanent update.
+
+---
+
 ## Signs this file is working
 
 - Fewer unnecessary changes in diffs.
@@ -144,10 +182,13 @@ If any one layer fails, including the agent skipping its own rules, the next lay
 - Sub-agent briefs visibly contain "User's exact words" and "Out of scope" blocks.
 - Drift is caught by audit log, not by user re-checking everything.
 - Token spend on a session stays flat instead of climbing on every long output.
+- The agent works longer between check-ins without losing direction (autonomy).
+- Repeated failure modes become rules in the system instead of recurring losses (self-annealing).
 
 ## Credits
 
 - **Part A** adapted from Andrej Karpathy's public observations on LLM coding mistakes. The 4 rules are widely circulated in a community compilation at github.com/multica-ai/andrej-karpathy-skills.
 - **Part B** original work by Varuna Jain, founder of GrowthShot.ai (global) and GrowthSetu.ai (India). Drawn from real long-session Claude Code builds running voice, WhatsApp, and website AI agents for small and medium businesses.
+- **Part C** original work by Varuna Jain, building on agent engineering principles widely discussed in the AI agent engineering community.
 
 Free to use, fork, adapt, or extend. Credit appreciated but not required.
